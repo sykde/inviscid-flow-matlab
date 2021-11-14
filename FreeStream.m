@@ -52,8 +52,8 @@ classdef FreeStream
             obj.v = Uinf * sin(deg2rad(obj.alpha));
         end
         
-        function obj = streamfunction(obj, X, Y)
-            %STREAMFUNCTION Computes the stream function generated from 
+        function obj = setstreamfunction(obj, X, Y)
+            %SETSTREAMFUNCTION Computes the stream function generated from 
             % freestream.
             %
             %   Arguments
@@ -79,8 +79,8 @@ classdef FreeStream
             obj.psi = obj.Uinf * ( (-1) * sin(deg2rad(obj.alpha)) * X + cos(deg2rad(obj.alpha)) * Y);
         end
         
-        function obj = scalarpotential(obj, X, Y)
-            %SCALARPOTENTIAL Computes the scalar potential generated from 
+        function obj = setscalarpotential(obj, X, Y)
+            %SETSCALARPOTENTIAL Computes the scalar potential generated from 
             % freestream.
             %
             %   Arguments
