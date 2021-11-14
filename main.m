@@ -29,7 +29,7 @@ close all;
 
 % For NACA 4-digit airfoils: (NACA MPXX)
 % [xCoords, yCoords] = createairfoilgeometry(M,P,XX,chord length,# of panels per side)
-[xAirfoil, yAirfoil] = createairfoilgeometry(3,3,13,1,50);
+[xAirfoil, yAirfoil] = createairfoilgeometry(2,4,12,1,50);
 
 [panels] = invokepanels(xAirfoil, yAirfoil);
 
@@ -147,7 +147,7 @@ yGridRange = linspace(-0.5,0.5,50);
 fluidVelocityMagnitude = sqrt(uu.^2 + vv.^2);
 
 nexttile
-hold on; grid on;
+hold on; grid on; axis equal
 xlim([-0.5, 1.5])
 ylim([-0.5, 0.5])
 [MM1, c1] = contour(xGrid, yGrid, fluidVelocityMagnitude, 20);
@@ -158,7 +158,7 @@ title("Contour of fluid velocity")
 cp = 1.0 - (uu.^2 + vv.^2) ./ freeStream.Uinf^2;
 
 nexttile
-hold on; grid on;
+hold on; grid on; axis equal
 xlim([-0.5, 1.5])
 ylim([-0.5, 0.5])
 [MM2, c2] = contour(xGrid, yGrid, cp, 20);
