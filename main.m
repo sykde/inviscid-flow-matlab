@@ -29,7 +29,7 @@ close all;
 
 % For NACA 4-digit airfoils: (NACA MPXX)
 % [xCoords, yCoords] = createairfoilgeometry(M,P,XX,chord length,# of panels per side)
-[xAirfoil, yAirfoil] = createairfoilgeometry(6,6,15,1,50);
+[xAirfoil, yAirfoil] = createairfoilgeometry(3,3,13,1,50);
 
 [panels] = invokepanels(xAirfoil, yAirfoil);
 
@@ -138,3 +138,30 @@ for iPanel = 1:length(panels)
 end
 formatSpec = 'CLcp = %f, CDcp = %f\n';
 fprintf(formatSpec,clcp, cdcp)
+
+xGridRange = linspace(-0.5,1.5,50);
+yGridRange = linspace(-0.5,0.5,50);
+[xGrid, yGrid] = meshgrid(xGridRange, yGridRange);
+
+[uu, vv] = getvelocityfield(panels, freeStream, xGrid, yGrid);
+fluidVelocityMagnitude = sqrt(uu.^2 + vv.^2);
+
+nexttile
+hold on; grid on;
+xlim([-0.5, 1.5])
+ylim([-0.5, 0.5])
+[MM1, c1] = contour(xGrid, yGrid, fluidVelocityMagnitude, 20);
+c1.LineWidth = 2;
+fill(xAirfoil, yAirfoil, [0, 0, 0])
+title("Contour of fluid velocity")
+
+cp = 1.0 - (uu.^2 + vv.^2) ./ freeStream.Uinf^2;
+
+nexttile
+hold on; grid on;
+xlim([-0.5, 1.5])
+ylim([-0.5, 0.5])
+[MM2, c2] = contour(xGrid, yGrid, cp, 20);
+c2.LineWidth = 2;
+fill(xAirfoil, yAirfoil, [0, 0, 0])
+title("Contour of fluid pressure")

@@ -55,7 +55,11 @@ function [xAirfoilCoords, yAirfoilCoords] = createairfoilgeometry(maxCamber, max
         
         angleRange = linspace(0, pi, nPointsPerSide);
         x = (1 - cos(angleRange)) ./ 2;
-        whereIsP = round(maxCamberPosition * length(x));
+        whereIsP = maxCamberPosition * chord;
+        betaOfP = acos(1 - 2 * whereIsP);
+        tiny = pi/(2*nPointsPerSide);
+        whereIsP = and(angleRange > betaOfP - tiny, angleRange < betaOfP + tiny);
+        whereIsP = find(whereIsP == 1);
         yc = [yc1(x(1:whereIsP)), yc2(x(whereIsP+1:end))];
 
         % derivative of yc: (dy/dx)
