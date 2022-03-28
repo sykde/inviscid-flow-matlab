@@ -11,7 +11,7 @@ The main program. Calculates the airflow around an object. By default the object
 Reads a list of points from a file and assigns them to a variable. The variable contains an array of size [2, N], where N is the count of points in the file. By default this function is unused. However, should the user desire to calculate the airflow around an object other than a NACA 4-digit airfoil, they should use this function instead of the default one.
 
 ### createairfoilgeometry.m
-Returns 2 vectors with the coordinates of the desired amount of points that comprise the boundary of a NACA 4-digit airfoil. The coordinates of the points on the X-axis follow a cosine spacing for better accuracy of the calculations near the leading and trailing edges of the airfoil. By default the NACA 3313 airfoil is created. Users may change the input arguments of this function at will.
+Returns 2 matrices with the X and Y coordinates (respectively) of points on the boundary of a NACA 4-digit airfoil. Cosine spacing was used for accuracy. By default the NACA 3313 airfoil is created. Users may change the input arguments of this function at will.
 
     Usage: To create a NACA 2412 airfoil with a chord length of 1 which is described by 50 points on each side, 
     the command should be used as following:
